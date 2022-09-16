@@ -12,7 +12,7 @@
     "lint:code-fix": "eslint --fix --ext .js,.jsx",
     "lint:output-html": "npx eslint --ext .js,.jsx . -f html -o eslint-result.html --quiet",
     "prettier:code-fix": "prettier --write",
-    "api": "json-server --watch db.json"
+    "api": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
