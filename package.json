@@ -11,7 +11,8 @@
     "lint:code": "eslint --ext .js,.jsx",
     "lint:code-fix": "eslint --fix --ext .js,.jsx",
     "lint:output-html": "npx eslint --ext .js,.jsx . -f html -o eslint-result.html --quiet",
-    "prettier:code-fix": "prettier --write"
+    "prettier:code-fix": "prettier --write",
+    "api": "json-server --watch db.json"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -34,6 +35,7 @@
     "eslint-plugin-react": "^7.31.7",
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
+    "json-server": "^0.17.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "vite": "^3.0.7"
