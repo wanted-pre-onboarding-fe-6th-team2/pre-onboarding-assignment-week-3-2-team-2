@@ -1,29 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getComments } from '@/store/comment';
 import CommentList from '@/components/home/CommentList/CommentList';
 import Form from '@/components/home/Form/Form';
 import PageList from '@/components/home/PageList/PageList';
-import commentsApiService from '@/api/commentsApiService';
 
 const Home = () => {
-  const [commentList, setCommentList] = useState([]);
-
+  const { loading, data, error } = useSelector(state => state.comment.comments);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const commentsResponse = await commentsApiService.getComments();
+    dispatch(getComments());
+  }, [dispatch]);
 
-        setCommentList(commentsResponse);
-      } catch (error) {
-        throw new Error(error);
-      }
-    };
-
-    fetchComments();
-  }, []);
-
+  if (loading) return <div>loading...</div>;
+  if (error) return <div>error.. </div>;
+  if (!data) return null;
   return (
     <>
-      <CommentList commentList={commentList} />
+      <CommentList commentList={data} />
       <PageList />
       <Form />
     </>
