@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import commentsApiService from '@/api/commentsApiService';
+import { extraReducerUtils } from '@/lib/asyncUtils';
 
 export const getCommentsThunk = createAsyncThunk('comments/getComments', async thunkAPI => {
   try {
@@ -19,19 +20,7 @@ const initialState = {
 export const commentsSlice = createSlice({
   name: 'comments',
   initialState,
-  extraReducers: {
-    [getCommentsThunk.pending]: state => {
-      state.isLoading = true;
-    },
-    [getCommentsThunk.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.data = action.payload;
-    },
-    [getCommentsThunk.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.error.message;
-    },
-  },
+  extraReducers: extraReducerUtils(getCommentsThunk),
 });
 
 export default commentsSlice.reducer;
