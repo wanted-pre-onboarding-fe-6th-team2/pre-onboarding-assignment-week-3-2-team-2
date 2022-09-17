@@ -8,7 +8,7 @@ const initialState = {
   },
   comment: {
     isLoading: false,
-    data: [],
+    data: null,
     error: null,
   },
 };
