@@ -14,6 +14,7 @@ export const FormStyle = styled.div`
     padding: 10px 10px;
     margin-bottom: 50px;
   }
+
   & > form > textarea {
     padding: 5px 1%;
     width: 98%;
@@ -26,10 +27,13 @@ export const FormStyle = styled.div`
     height: 30px;
     ${boxShadow}
   }
-  & > form > button {
+  & > form > div > button {
     width: 70px;
     padding: 0.375rem 0.75rem;
     ${boxShadow}
     cursor: pointer;
+  }
+  & > form > div > #cancleBtn {
+    margin-left: 12px;
   }
 `;
