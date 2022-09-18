@@ -12,7 +12,9 @@ class BaseApiService {
     });
   }
 
-  static handleResponse = response => response.data;
+  static handleResponse = response => {
+    return response;
+  };
 
   static handleError(error) {
     if (error instanceof Error) {
