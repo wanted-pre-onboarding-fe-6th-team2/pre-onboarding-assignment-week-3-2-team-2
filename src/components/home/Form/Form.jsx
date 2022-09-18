@@ -1,15 +1,41 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { addCommentThunk, getCommentThunk, updateCommentThunk } from '@/store/comment';
 import * as Styled from './Form.styled';
 
-const Form = () => {
-  const [inputs, setInputs] = useState({
-    profileUrl: '',
-    author: '',
-    content: '',
-    createdAt: '',
-  });
+const initialValue = {
+  profileUrl: '',
+  author: '',
+  content: '',
+  createdAt: '',
+};
+
+const Form = ({ selectedId, setSelectedId, setCurrentPage }) => {
+  const dispatch = useDispatch();
+  const focusRef = useRef();
+  const [inputs, setInputs] = useState(initialValue);
 
   const { profileUrl, author, content, createdAt } = inputs;
+
+  const fetchComment = useCallback(
+    async id => {
+      const response = await dispatch(getCommentThunk(id));
+      setInputs({
+        profileUrl: response.payload.profile_url,
+        author: response.payload.author,
+        content: response.payload.content,
+        createdAt: response.payload.createdAt,
+      });
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (selectedId) {
+      fetchComment(selectedId);
+      focusRef.current.focus();
+    }
+  }, [selectedId, fetchComment]);
 
   const onChange = e => {
     const { value, name } = e.target;
@@ -21,12 +47,26 @@ const Form = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+    if (!selectedId) {
+      dispatch(addCommentThunk(inputs));
+    } else {
+      dispatch(updateCommentThunk({ commentId: selectedId, comment: { ...inputs } }));
+      setCurrentPage(1);
+    }
+    setSelectedId();
+    setInputs(initialValue);
+  };
+
+  const cancleConfig = () => {
+    if (selectedId) setSelectedId();
+    setInputs(initialValue);
   };
 
   return (
     <Styled.FormStyle>
       <form onSubmit={onSubmit}>
         <input
+          ref={focusRef}
           type="text"
           name="profileUrl"
           placeholder="https://picsum.photos/id/1/50/50"
@@ -48,7 +88,12 @@ const Form = () => {
           required
         />
         <br />
-        <button type="submit">등록</button>
+        <div>
+          <button type="submit">{selectedId ? '수정' : '등록'}</button>
+          <button id="cancleBtn" type="button" onClick={cancleConfig}>
+            취소
+          </button>
+        </div>
       </form>
     </Styled.FormStyle>
   );
