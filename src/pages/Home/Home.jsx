@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import CommentList from '@/components/home/CommentList/CommentList';
 import Form from '@/components/home/Form/Form';
 import PageList from '@/components/home/PageList/PageList';
-import commentsApiService from '@/api/commentsApiService';
+import { getCommentsThunk } from '@/store/comments';
 
 const Home = () => {
-  const [commentList, setCommentList] = useState([]);
+  const isLoading = useSelector(state => state.comments.isLoading);
+  const data = useSelector(state => state.comments.data);
+  const error = useSelector(state => state.comments.error);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const commentsResponse = await commentsApiService.getComments();
+    dispatch(getCommentsThunk());
+  }, [dispatch]);
 
-        setCommentList(commentsResponse);
-      } catch (error) {
-        throw new Error(error);
-      }
-    };
-
-    fetchComments();
-  }, []);
+  if (isLoading) return <h1>로딩 중입니다...</h1>;
+  if (error) return <h1>{error.message}</h1>;
+  if (!data) return null;
 
   return (
     <>
-      <CommentList commentList={commentList} />
+      <CommentList commentList={data} />
       <PageList />
       <Form />
     </>
