@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import commentsApiService from '@/api/commentsApiService';
-import { extraReducerUtils } from '@/lib/asyncUtils';
+import { extraReducerUtils } from '@/lib/extraReducerUtils';
 
 export const getCommentThunk = createAsyncThunk(
   'comment/getComment',
   async (commentId, thunkAPI) => {
     try {
-      const comment = await commentsApiService.getComment({ commentId });
+      const commentResponse = await commentsApiService.getComment({ commentId });
+      const comment = await commentResponse.data;
       return comment;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
