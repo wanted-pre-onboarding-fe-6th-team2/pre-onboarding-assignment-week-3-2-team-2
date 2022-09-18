@@ -10,7 +10,7 @@ const Comment = styled.div`
     width: 50px;
     height: 50px;
   }
-  &:first-child {
+  &:first-of-type {
     margin-top: 20px;
   }
 `;

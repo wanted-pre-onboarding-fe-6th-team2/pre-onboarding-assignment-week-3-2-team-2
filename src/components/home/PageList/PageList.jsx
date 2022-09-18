@@ -1,7 +1,7 @@
 import * as Styled from './PageList.styled';
 
-const PageList = ({ totalComments, limit, currentPage, setCurrentPage }) => {
-  const totalPaginate = Math.ceil(totalComments / limit);
+const PageList = ({ totalCount, limit, currentPage, setCurrentPage }) => {
+  const totalPaginate = Math.ceil(totalCount / limit);
 
   const handlePageChange = i => {
     setCurrentPage(i + 1);

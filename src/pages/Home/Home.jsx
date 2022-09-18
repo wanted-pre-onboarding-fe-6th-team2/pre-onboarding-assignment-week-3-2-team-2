@@ -16,12 +16,12 @@ const Home = () => {
   const limit = 10;
 
   useEffect(() => {
-    dispatch(getCommentsThunk({currentPage, limit}));
+    dispatch(getCommentsThunk(currentPage, limit));
   }, [dispatch, currentPage, setCurrentPage]);
 
   if (isLoading) return <h1>로딩 중입니다...</h1>;
   if (error) return <h1>{error.message}</h1>;
-  if (!data) return null;
+  if (!commentList) return null;
 
   return (
     <>
