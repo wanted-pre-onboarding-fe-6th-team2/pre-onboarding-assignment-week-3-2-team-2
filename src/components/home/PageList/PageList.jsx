@@ -1,14 +1,28 @@
 import * as Styled from './PageList.styled';
 
-const PageList = () => {
-  const pageArray = [];
+const PageList = ({ totalComments, limit, currentPage, setCurrentPage }) => {
+  const totalPaginate = Math.ceil(totalComments / limit);
 
-  pageArray.push(
-    // 임시로 페이지 하나만 설정했습니다.
-    <Styled.Page key="1">1</Styled.Page>
+  const handlePageChange = i => {
+    setCurrentPage(i + 1);
+    window.scrollTo(0, 0);
+  };
+
+  return (
+    <Styled.PageListStyle>
+      {Array(totalPaginate)
+        .fill()
+        .map((_, i) => (
+          <Styled.Page
+            key={i}
+            onClick={() => handlePageChange(i)}
+            aria-current={currentPage === i + 1 ? 'currentPage' : null}
+          >
+            {i + 1}
+          </Styled.Page>
+        ))}
+    </Styled.PageListStyle>
   );
-
-  return <Styled.PageListStyle>{pageArray}</Styled.PageListStyle>;
 };
 
 export default PageList;
