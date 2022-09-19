@@ -1,21 +1,19 @@
 import styled from '@emotion/styled';
 
-export const PageListStyle = styled.div`
-  margin-bottom: 20px;
+const PageListStyle = styled.div`
+  margin: 20px 0 50px;
   text-align: center;
 `;
 
-export const Page = styled.button`
-  padding: 0.375rem 0.75rem;
-  border-radius: 0.25rem;
+const Page = styled.button`
+  margin: 0 10px;
   font-size: 1rem;
-  line-height: 1.5;
-  border: 1px solid lightgray;
-  ${({ active }) =>
-    active &&
-    `
-        background: gray;
-        color: #fff;
-  `}
-  margin-right: 3px;
+  line-height: 30px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  background: transparent;
+  ${props => props['aria-current'] && `border-bottom:3px solid #000`}
 `;
+
+export { Page, PageListStyle };
