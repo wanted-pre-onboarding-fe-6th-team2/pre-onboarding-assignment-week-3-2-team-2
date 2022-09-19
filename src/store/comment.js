@@ -17,7 +17,8 @@ export const getCommentThunk = createAsyncThunk(
 
 export const addCommentThunk = createAsyncThunk('comment/addComment', async (comment, thunkAPI) => {
   try {
-    const newComment = await commentsApiService.createComment({ comment });
+    const newCommentResponse = await commentsApiService.createComment({ comment });
+    const newComment = await newCommentResponse.data;
     return newComment;
   } catch (error) {
     return thunkAPI.rejectWithValue(error);
@@ -28,7 +29,8 @@ export const updateCommentThunk = createAsyncThunk(
   'comment/updateComment',
   async ({ commentId, comment }, thunkAPI) => {
     try {
-      const newComment = await commentsApiService.updateComment({ commentId, comment });
+      const newCommentResponse = await commentsApiService.updateComment({ commentId, comment });
+      const newComment = await newCommentResponse.data;
       return newComment;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -40,7 +42,7 @@ export const deleteCommentThunk = createAsyncThunk(
   'comment/deleteComment',
   async (commentId, thunkAPI) => {
     try {
-      return await commentsApiService.deleteComment({ commentId });
+      return await commentsApiService.deleteComment({ commentId }).data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
