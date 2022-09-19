@@ -4,6 +4,7 @@ import CommentList from '@/components/home/CommentList/CommentList';
 import Form from '@/components/home/Form/Form';
 import PageList from '@/components/home/PageList/PageList';
 import { getCommentsThunk } from '@/store/comments';
+import Loading from '@/components/common/Loading/Loading';
 
 const Home = () => {
   const isLoading = useSelector(state => state.comments.isLoading);
@@ -20,7 +21,7 @@ const Home = () => {
     dispatch(getCommentsThunk(currentPage, limit));
   }, [dispatch, currentPage, setCurrentPage]);
 
-  if (isLoading) return <h1>로딩 중입니다...</h1>;
+  if (isLoading) return <Loading />;
   if (error) return <h1>{error.message}</h1>;
   if (!commentList) return null;
 
