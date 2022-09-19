@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import commentsReducer from '@/store/comments';
-import commentReducer from '@/store/comment';
 
 const store = configureStore({
-  reducer: { comments: commentsReducer, comment: commentReducer },
+  reducer: { comments: commentsReducer },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
 });
