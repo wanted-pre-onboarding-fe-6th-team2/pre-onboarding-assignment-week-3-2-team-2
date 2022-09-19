@@ -23,7 +23,14 @@ wldbszpflrxj">변지윤</a></td>
 
 > ## 데모
 
-[🌎 데모 영상]()
+- ### 댓글 추가  
+  ![add](https://user-images.githubusercontent.com/15073430/190943256-d514bfda-a8f8-4d83-ab31-7517ffb6bf9b.gif)
+
+- ### 댓글 수정  
+  ![config](https://user-images.githubusercontent.com/15073430/190943293-095325ac-2253-4786-872f-c3dc704b61fa.gif)
+
+- ### 댓글 삭제  
+  ![delete](https://user-images.githubusercontent.com/15073430/190943298-2e95cdf5-2ad3-4c4f-8711-ab488ed63e43.gif)
 
 > ## 실행 방법
 
