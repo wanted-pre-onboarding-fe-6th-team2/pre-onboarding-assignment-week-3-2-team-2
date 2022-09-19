@@ -45,8 +45,7 @@ const Form = ({ selectedId, setSelectedId, setCurrentPage }) => {
     });
   };
 
-  const onSubmit = e => {
-    e.preventDefault();
+  const onSubmit = () => {
     if (!selectedId) {
       dispatch(addCommentThunk(inputs));
       setCurrentPage(1);
