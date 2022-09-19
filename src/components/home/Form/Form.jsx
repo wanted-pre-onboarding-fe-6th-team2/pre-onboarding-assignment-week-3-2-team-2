@@ -21,7 +21,7 @@ const Form = ({ selectedId, setSelectedId, setCurrentPage }) => {
     async id => {
       const response = await dispatch(getCommentThunk(id));
       setInputs({
-        profileUrl: response.payload.profile_url,
+        profileUrl: response.payload.profileUrl,
         author: response.payload.author,
         content: response.payload.content,
         createdAt: response.payload.createdAt,
@@ -49,16 +49,16 @@ const Form = ({ selectedId, setSelectedId, setCurrentPage }) => {
     e.preventDefault();
     if (!selectedId) {
       dispatch(addCommentThunk(inputs));
+      setCurrentPage(1);
     } else {
       dispatch(updateCommentThunk({ commentId: selectedId, comment: { ...inputs } }));
-      setCurrentPage(1);
     }
-    setSelectedId();
+    setSelectedId(null);
     setInputs(initialValue);
   };
 
   const cancleConfig = () => {
-    if (selectedId) setSelectedId();
+    if (selectedId) setSelectedId(null);
     setInputs(initialValue);
   };
 
