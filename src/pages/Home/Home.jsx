@@ -6,10 +6,9 @@ import PageList from '@/components/home/PageList/PageList';
 import { getCommentsThunk } from '@/store/comments';
 
 const Home = () => {
-  const isLoading = useSelector(state => state.comments.isLoading);
-  const error = useSelector(state => state.comments.error);
-  const commentList = useSelector(state => state.comments.data.data);
-  const totalCount = useSelector(state => state.comments.data.totalCount);
+  const { isLoading, error, data } = useSelector(state => state.comments);
+  const commentList = data.data;
+  const { totalCount } = data;
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
