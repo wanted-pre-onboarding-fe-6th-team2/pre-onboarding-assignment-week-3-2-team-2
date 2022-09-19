@@ -63,7 +63,6 @@ src
 │    ├─CommentList
 │    ├─Form
 │    └─PageList
-├─lib
 ├─pages
 │  └─Home
 ├─store
@@ -84,7 +83,6 @@ src
 
 - 전체 댓글 불러오기, 댓글 하나의 데이터 불러오기, 댓글 CRUD 관련 Thunk를 작성
 - 각각의 기능에 대한 슬라이스를 구현한 뒤, 엑스트라 리듀서를 통해 미들웨어를 세 단계의 비동기 처리(panding, fulfilled, rejected)로 구현
-- 미들웨어 내 중복된 코드를 처리하기 위해 모듈화(`lib/extraReducerUtils.js`)
 
 **트러블 슈팅**
 
