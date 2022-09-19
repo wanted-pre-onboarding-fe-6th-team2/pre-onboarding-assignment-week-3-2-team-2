@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
-export const Comment = styled.div`
-  padding: 7px 10px;
+const Comment = styled.div`
+  padding: 15px 15px 0;
   text-align: left;
   & > img {
     vertical-align: middle;
@@ -10,25 +10,33 @@ export const Comment = styled.div`
     width: 50px;
     height: 50px;
   }
+  &:first-of-type {
+    margin-top: 20px;
+  }
 `;
 
-export const CreatedAt = styled.div`
+const CreatedAt = styled.div`
   float: right;
   vertical-align: middle;
 `;
 
-export const Content = styled.div`
-  margin: 10px 0;
+const Content = styled.div`
+  margin: 15px 0;
 `;
 
-export const Button = styled.div`
+const Button = styled.div`
   text-align: right;
   margin: 10px 0;
   & > button {
-    margin-right: 10px;
-    padding: 0.375rem 0.75rem;
-    border-radius: 0.25rem;
-    border: 1px solid lightgray;
+    & + button {
+      margin-left: 10px;
+    }
+    min-width: 60px;
+    line-height: 30px;
+    border: 1px solid #666;
+    background: #fff;
     cursor: pointer;
   }
 `;
+
+export { Comment, Button, Content, CreatedAt };
