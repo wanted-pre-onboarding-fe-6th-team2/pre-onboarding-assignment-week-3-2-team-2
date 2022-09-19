@@ -12,6 +12,7 @@ const Home = () => {
   const totalCount = useSelector(state => state.comments.data.totalCount);
   const dispatch = useDispatch();
 
+  const [selectedId, setSelectedId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
 
@@ -25,14 +26,18 @@ const Home = () => {
 
   return (
     <>
-      <CommentList commentList={commentList} />
+      <CommentList
+        commentList={commentList}
+        setSelectedId={setSelectedId}
+        setCurrentPage={setCurrentPage}
+      />
       <PageList
         totalCount={totalCount}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         limit={limit}
       />
-      <Form />
+      <Form selectedId={selectedId} setSelectedId={setSelectedId} setCurrentPage={setCurrentPage} />
     </>
   );
 };
